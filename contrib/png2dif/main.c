@@ -21,7 +21,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
+#include <Winsock2.h>
 #include <unistd.h>
 
 int png2dif(char *png_filename, char *dif_filename) {
@@ -44,7 +45,7 @@ int png2dif(char *png_filename, char *dif_filename) {
 
   upng_decode(upng);
   if (upng_get_error(upng) != UPNG_EOK) {
-    LOG(LL_ERROR, ("PNG decode error"));
+    LOG(LL_ERROR, ("PNG decode error %d", upng_get_error(upng)));
     goto exit;
   }
   if (upng_get_format(upng) != UPNG_RGB8) {

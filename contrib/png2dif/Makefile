@@ -1,7 +1,7 @@
 TARGET = png2dif
-LIBS =
+LIBS = -lws2_32
 CC = gcc
-CFLAGS = -g -Wall -I./ -I ../../include -I ../../third_party/upng/include -I ../../third_party/adafruit/include
+CFLAGS = -g -Wall -I./ -I ../../include -I ../../third_party/upng/include -I ../../third_party/adafruit/include 
 
 .PHONY: default all clean
 
@@ -13,12 +13,12 @@ SRCS    = ../../third_party/upng/src/upng.c
 HEADERS = $(wildcard *.h)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -lws2_32
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) $(SRCS) -o $@
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) $(SRCS) -o $@ -lws2_32
 
 clean:
 	-rm -f $(OBJECTS)
